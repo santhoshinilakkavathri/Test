@@ -1,59 +1,57 @@
-<!DOCTYPE html>  
- <html>  
-      <head>  
-           <title>Webslesson Tutorial | Show JSON Data in Jquery Datatables</title>  
-           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-           <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>  
-           <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>  
-      </head>  
-      <body>  
+<html>
 
-           <br /><br />  
-           <div class="container">  
-                <h1 align="center">Show JSON Data in Jquery Datatables</h3><br />  
+<script type="text/javascript" charset="utf8" src="jquery-3.3.1.js">
+</script><script type="text/javascript" charset="utf8" src="datatables/js/jquery.dataTables.js">
+</script><script type="text/javascript" charset="utf8" src="datatables.js"></script>
+<link rel="stylesheet" type="text/css" href="datatables.min.css">
 
-                <h3 align="center">Employee Database</h3><br />  
-  <select id="myDropDown" style="padding-left:100px;">
-<option value="Female">Female</option>
-<option value="Male">Male</option>
-</select>
+<style>body {background-color: #EFEFEF;font-family:Calibri,Arial}h1 {color: blue;}p {color: red;}</style>
 
-                  
-                <table id="data-table" class="table table-bordered">  
 
-                     <thead>  
-                          <tr>  
-                               <th>Name</th>  
-                               <th>Gender</th>  
-                               <th>Designation</th>  
-                          </tr>  
-                     </thead>  
-                </table>  
-           </div>  
-      </body>  
- </html>  
- <script>  
- $(document).ready(function(){  
-    var table=$('#data-table').DataTable({  
-           "ajax"     :     "employee_data.json", 
-            "order": [[ 0, "desc" ]], 
-           "columns"     :     [  
-                {     "data"     :     "name"     },  
-                {     "data"     :     "gender"},  
-                {     "data"     :     "designation"}  
-           ]  
-      }); 
-   $("#myDropDown").change(function () {
+<script>
 
-   table.column(1)
- .search("^" + $(this).val() + "$", true, false, true)
- .draw();
-   });
+     $(document).ready(function() { 
 
- });  
- </script>
+            var table=$('#example').DataTable(
+             { "order": [[ 0, "desc" ]],
+               "ajax": 'jenkins_workspace/dashboard/generate_deployments_list/deployments.json'
+               });
+
+ 	$("#myDropDown").change(function () {
+ 	  table.column(1)
+ 	.search("^" + $(this).val() + "$", true, false, true)
+ 	.draw();
+  	 });
+ 
+
+      });
+
+</script>
+
+<body><br><a href="/"> << Home </a><br><h2 style="padding-left:100px;">Recent deployments of Citrus jars to datacenters</h2><br>
+<div style="padding:20px;border:1px solid black;background-color: powderblue;">
+
+
+<p>Choose:<select id="myDropDown" style="padding-left:50px;">
+<option value="datacenter">datacenter</option>
+<option value="datacenterdev">datacenterdev</option>
+<option value="datacentertest">datacentertest</option>
+</select></p>
 
 
 
+
+<table id="example" class="display" style="padding-left:10px;width:100%;">
+<thead><tr> 
+<th>Build</th> 
+<th>Datacenter</th> 
+<th>Version</th> 
+<th>Start time</th> 
+<th>Status</th>
+ <th>Duration(minutes)</th>
+ <th>Nexus URL</th></tr>
+</table>
+
+</div>
+</body>
+</html>
