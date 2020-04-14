@@ -1,9 +1,13 @@
 <html>
 
+
 <script type="text/javascript" charset="utf8" src="jquery-3.3.1.js">
 </script><script type="text/javascript" charset="utf8" src="datatables/js/jquery.dataTables.js">
 </script><script type="text/javascript" charset="utf8" src="datatables.js"></script>
 <link rel="stylesheet" type="text/css" href="datatables.min.css">
+
+
+
 
 <style>body {background-color: #EFEFEF;font-family:Calibri,Arial}h1 {color: blue;}p {color: red;}</style>
 
@@ -12,10 +16,13 @@
 
      $(document).ready(function() { 
 
+
             var table=$('#example').DataTable(
+
              { "order": [[ 0, "desc" ]],
                "ajax": 'jenkins_workspace/dashboard/generate_deployments_list/deployments.json'
                });
+
 
  	$("#myDropDown").change(function () {
  	  table.column(1)
@@ -23,13 +30,13 @@
  	.draw();
   	 });
  
-
       });
 
 </script>
 
 <body><br><a href="/"> << Home </a><br><h2 style="padding-left:100px;">Recent deployments of Citrus jars to datacenters</h2><br>
 <div style="padding:20px;border:1px solid black;background-color: powderblue;">
+
 
 
 <p>Choose:<select id="myDropDown" style="padding-left:50px;">
@@ -41,17 +48,23 @@
 
 
 
+
 <table id="example" class="display" style="padding-left:10px;width:100%;">
-<thead><tr> 
+<thead>
+<tr> 
+
 <th>Build</th> 
 <th>Datacenter</th> 
 <th>Version</th> 
 <th>Start time</th> 
 <th>Status</th>
  <th>Duration(minutes)</th>
+
  <th>Nexus URL</th></tr>
 </table>
 
 </div>
 </body>
+
+
 </html>
